@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-learning Vidéos - Expérience Immersive</title>
+  <!-- Intégration d'une police moderne -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="header-text">
+        <h1>trITon learning</h1>
+        <p>Vidéos gratuites d'apprentissage de l'IT</p>
+      </div>
+      <div class="logo">
+        <img src="images/logo-trITon.svg" alt="Logo trITon" class="logo">
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <!-- Bouton de menu visible en mobile -->
+    <button id="menuToggle">Table des matières</button>
+    
+    <!-- Sidebar / Playlist -->
+    <aside id="playlistSidebar" class="sidebar">
+      <h2>Gestion des identités numériques</h2>
+      <ul id="videoList">
+        <li data-src="videos/digital_identity_management_Part1.mp4">Gestion des identités numériques: Partie 1</li>
+        <li data-src="videos/digital_identity_management_Part2.mp4">Gestion des identités numériques: Partie 2</li>
+      </ul>
+    </aside>
+    
+    <main class="main-content">
+      <div class="video-wrapper">
+        <video id="videoPlayer" controls>
+          <source src="videos/digital_identity_management_Part1.mp4" type="video/mp4">
+          Votre navigateur ne supporte pas les vidéos HTML5.
+        </video>
+      </div>
+    </main>
+  </div>
+  
+  <footer>
+    &copy; 2025 E-learning. Tous droits réservés.
+  </footer>
+  
+  <script>
+    // Gestion de la playlist et changement de vidéo
+    const videoPlayer = document.getElementById('videoPlayer');
+    const videoListItems = document.querySelectorAll('#videoList li');
+    
+    videoListItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const src = item.getAttribute('data-src');
+        videoPlayer.querySelector('source').setAttribute('src', src);
+        videoPlayer.load();
+        videoPlayer.play();
+        
+        // Indication visuelle de l'élément actif
+        videoListItems.forEach(i => i.style.opacity = '1');
+        item.style.opacity = '0.7';
+      });
+    });
+    
+    // Gestion du menu mobile pour la playlist
+    const menuToggle = document.getElementById('menuToggle');
+    const playlistSidebar = document.getElementById('playlistSidebar');
+    
+    menuToggle.addEventListener('click', () => {
+      if (playlistSidebar.style.display === 'block') {
+        playlistSidebar.style.display = 'none';
+        menuToggle.textContent = 'Afficher la playlist';
+      } else {
+        playlistSidebar.style.display = 'block';
+        menuToggle.textContent = 'Masquer la playlist';
+      }
+    });
+  </script>
+</body>
+</html>
